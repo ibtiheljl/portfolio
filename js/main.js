@@ -66,16 +66,19 @@
 	var onePageClick = function() {
 
 
-		$(document).on('click', '#ftco-nav a[href^="#"]', function (event) {
+		$(document).on('click', 'a[href^="#"]', function (event) {
+	    var href = $.attr(this, 'href');
+	    var target = $(href);
+
+	    if (!href || href === '#' || !target.length) {
+	    return;
+	    }
+
 	    event.preventDefault();
 
-	    var href = $.attr(this, 'href');
-
 	    $('html, body').animate({
-	        scrollTop: $($.attr(this, 'href')).offset().top - 70
-	    }, 500, function() {
-	    	// window.location.hash = href;
-	    });
+	        scrollTop: target.offset().top - 70
+	    }, 500);
 		});
 
 	};
